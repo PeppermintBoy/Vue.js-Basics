@@ -12,17 +12,36 @@
 		<h1>Hello, vue</h1>
 		<div id="app">
 			<div v-if="showBooks">
-				<p>{{ title }} - {{ author}} - {{ age }}</p>
+				<ul>
+					<li v-for="book in books">
+						<h3>{{ book.title }}</h3>
+						<p>{{ book.author }}</p>
+						<p>{{ book.age }}</p>
+					</li>
+				</ul>
 			</div>
 			<button v-on:click="age++">increase age</button>
 			<button v-on:click="age--">decrease age</button>
 			<button @click="toggleShowBooks">
+				<!-- v-if changes DOM, more time and energy consuming  -->
 				<span v-if="showBooks">Hide Books</span>
 				<span v-else>Show Books</span>
 			</button>
 
-			<!-- <div @click="changeTitle">Change title</div> -->
+			<!-- v-show changes CSS style ( display) -->
+			<div v-show="showBooks">Currently showing books</div>
+
+			<br />
+			<div class="box" @mouseover="handleEvent($event, 5)">
+				mouseover (enter)
+			</div>
+			<div class="box" @mouseleave="handleEvent">mouseleave</div>
+			<div class="box" @dblclick="handleEvent">double click</div>
+			<div class="box" @mousemove="handleMousemove">
+				mousemove - position x: {{x}} y: {{y}}
+			</div>
 		</div>
+
 		<script src="./main.js"></script>
 	</body>
 </html>
