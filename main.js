@@ -1,12 +1,28 @@
 const app = Vue.createApp({
 	data() {
 		return {
+			url: 'http://www.maplesake.com',
 			showBooks: true,
 
 			books: [
-				{ title: 'yoyo', author: 'nathan', age: 20 },
-				{ title: 'mobydick', author: 'jonathan', age: 30 },
-				{ title: 'bird is flying', author: 'nathan', age: 50 },
+				{
+					title: 'yoyointheHo',
+					author: 'nathan',
+					age: 20,
+					img: 'assets/1.jpg',
+				},
+				{
+					title: 'mobydick',
+					author: 'jonathan',
+					age: 30,
+					img: 'assets/2.jpeg',
+				},
+				{
+					title: 'bird is flying',
+					author: 'nathan',
+					age: 50,
+					img: 'assets/3.jpeg',
+				},
 			],
 			x: 0,
 			y: 0,
