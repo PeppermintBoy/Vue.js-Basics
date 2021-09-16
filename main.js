@@ -54,6 +54,12 @@ const app = Vue.createApp({
 			this.y = e.offsetY;
 		},
 	},
+	// comuted is depended on data(), if data() changes so does comouted
+	computed: {
+		filteredBooks() {
+			return this.books.filter(book => book.isFav);
+		},
+	},
 });
 
 app.mount('#app');
