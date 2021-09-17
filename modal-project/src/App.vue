@@ -1,6 +1,16 @@
 <template>
 	<h1>{{ title }}</h1>
-	<Modal :customProp="customProp" :text="text" theme="sale" />
+	<p>welcome...</p>
+	<div v-if="showModal">
+		<Modal
+			:customProp="customProp"
+			:text="text"
+			theme="sale"
+			@justCloseIt="toggleModal"
+		/>
+	</div>
+	<!-- click modifier -->
+	<button @click.alt="toggleModal">open modal (hold option)</button>
 </template>
 
 <script>
@@ -14,6 +24,7 @@ export default {
 			title: 'my first Vue app',
 			customProp: 'this is customProp',
 			text: 'this is text',
+			showModal: false,
 		};
 	},
 	methods: {
@@ -22,6 +33,9 @@ export default {
 			console.log(this.$refs.name);
 			this.$refs.name.classList.add('active');
 			this.$refs.name.focus();
+		},
+		toggleModal() {
+			this.showModal = !this.showModal;
 		},
 	},
 };

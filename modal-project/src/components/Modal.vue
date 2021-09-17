@@ -1,5 +1,6 @@
 <template>
-	<div class="backdrop">
+	<!-- click.self will only excute the subj div, not child divs -->
+	<div class="backdrop" @click.self="closeModal">
 		<div class="modal" :class="{ sale: theme === 'sale' }">
 			<h1>{{ customProp }}</h1>
 			<p>{{ text }}</p>
@@ -10,6 +11,11 @@
 <script>
 export default {
 	props: ['customProp', 'text', 'theme'],
+	methods: {
+		closeModal() {
+			this.$emit('justCloseIt');
+		},
+	},
 };
 </script>
 
