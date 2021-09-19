@@ -1,16 +1,17 @@
 <template>
 	<h1>Yoyo's Reaction Timer</h1>
-	<button @click="start" :disabled="isPlaying">Play</button>
+	<button class="button" @click="start" :disabled="isPlaying">Play</button>
 	<Block v-if="isPlaying" :delay="delay" @timerStopped="endGame" />
-	<p v-if="showResults">Your score: {{ score }} ms</p>
+	<Results v-if="showResults" :result="score" />
 </template>
 
 <script>
 import Block from './components/Block.vue';
+import Results from './components/Results.vue';
 
 export default {
 	name: 'App',
-	components: { Block },
+	components: { Block, Results },
 	data() {
 		return {
 			isPlaying: false,
@@ -42,5 +43,19 @@ export default {
 	text-align: center;
 	color: #444;
 	margin-top: 60px;
+}
+.button {
+	background: turquoise;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	font-size: 16px;
+	letter-spacing: 1px;
+	cursor: pointer;
+	margin: 10px;
+}
+.button[disabled] {
+	opacity: 0.2;
+	cursor: not-allowed;
 }
 </style>
