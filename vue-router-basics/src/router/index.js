@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import About from '../views/About.vue';
 import Jobs from '../views/Jobs/Jobs.vue';
 import JobDetails from '../views/Jobs/JobDetails.vue';
+import NotFound404 from '../views/NotFound404.vue';
 
 const routes = [
 	{
@@ -28,6 +29,17 @@ const routes = [
 		name: 'jobDetails',
 		component: JobDetails,
 		props: true,
+	},
+	//redirect from
+	{
+		path: '/all-jobs',
+		redirect: '/jobs',
+	},
+	//404 all non existing router
+	{
+		path: '/:catchAll(.*)',
+		name: 'NotFound404',
+		component: NotFound404,
 	},
 ];
 
