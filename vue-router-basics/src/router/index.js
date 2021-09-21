@@ -30,9 +30,11 @@ const routes = [
 		component: JobDetails,
 		props: true,
 	},
-	//redirect from
+	//redirect
 	{
+		// from
 		path: '/all-jobs',
+		// to
 		redirect: '/jobs',
 	},
 	//404 all non existing router
