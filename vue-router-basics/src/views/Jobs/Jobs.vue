@@ -12,12 +12,15 @@
 export default {
 	data() {
 		return {
-			jobs: [
-				{ title: 'UX Web Developer', id: 1, details: 'ux update' },
-				{ title: 'Backend Web Developer', id: 2, details: 'backend update' },
-				{ title: 'Frontend Web Developer', id: 3, details: 'frontend update' },
-			],
+			jobs: [],
 		};
+	},
+	//fetching JSON data
+	mounted() {
+		fetch('http://localhost:3000/jobs')
+			.then(res => res.json())
+			.then(data => (this.jobs = data))
+			.catch(err => cosole.log(err.message));
 	},
 };
 </script>
