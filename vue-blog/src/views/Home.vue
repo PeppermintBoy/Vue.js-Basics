@@ -1,8 +1,11 @@
 <template>
 	<div class="home">
 		Home
-		<p ref="para">My name is {{ name }} and my age is {{ age }}</p>
-		<button @click="handleClick">click me</button>
+		<!-- No need to name.value or age.value for output -->
+		<p>My name is {{ name }} and my age is {{ age }}</p>
+		<button @click="handleClick">change name to luigi</button>
+		<button @click="age++">add 1 to age</button>
+		<input type="text" v-model="name" />
 	</div>
 </template>
 
@@ -18,19 +21,17 @@ export default {
 	setup() {
 		console.log('setup');
 
-		const para = ref(null);
+		// const para = ref(null);
 
-		let name = 'mario';
-		let age = 30;
+		//when you wrap variable with ref(), it becomes reactive
+		const name = ref('mario');
+		const age = ref(30);
 
 		const handleClick = () => {
-			console.log(para);
-			console.log(para.value);
-			para.value.classList.add('test');
-			para.value.textContent = 'hello, homies';
+			name.value = 'luigi';
 		};
 
-		return { name, age, handleClick, para };
+		return { name, age, handleClick };
 	},
 };
 </script>
