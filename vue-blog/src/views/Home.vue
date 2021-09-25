@@ -20,11 +20,14 @@
 		<div v-for="name in matchingNames" :key="name">
 			{{ name }}
 		</div>
+		<!-- stop watch -->
+		<button @click="handleClick">stop watching</button>
 	</div>
 </template>
 
 <script>
 import { ref, reactive, computed } from '@vue/reactivity';
+import { watch, watchEffect } from '@vue/runtime-core';
 // @ is an alias to /src
 
 export default {
@@ -51,6 +54,21 @@ export default {
 		const matchingNames = computed(() => {
 			return names.value.filter(name => name.includes(search.value));
 		});
+
+		//watch & watchEffect
+		// watch requires you to define what to watch (ex: search)
+		const stopWatch = watch(search, () => {
+			console.log('watch');
+		});
+		// watchEffect will watch watever variable is inside
+		const stopEffect = watchEffect(() => {
+			console.log('watchEffect', search.value);
+		});
+		const handleClick = () => {
+			stopWatch();
+			stopEffect();
+		};
+
 		return {
 			ninjaOne,
 			updateNinjaOne,
@@ -58,6 +76,7 @@ export default {
 			updateNinjaTwo,
 			matchingNames,
 			search,
+			handleClick,
 		};
 	},
 };
