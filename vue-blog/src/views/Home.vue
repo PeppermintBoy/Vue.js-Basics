@@ -23,8 +23,11 @@
 		<!-- stop watch -->
 		<button @click="handleClick">stop watching</button>
 
-		<!-- Props -->
-		<PostList :posts="posts" />
+		<!-- Props & lifecycle hooks -->
+		<h2>Props & Lifecycle hooks</h2>
+		<PostList v-if="showPosts" :posts="posts" />
+		<button @click="showPosts = !showPosts">Toggle posts</button>
+		<button @click="posts.pop()">Delete a post</button>
 	</div>
 </template>
 
@@ -90,6 +93,8 @@ export default {
 				id: 2,
 			},
 		]);
+		//Lifecycles
+		const showPosts = ref(false);
 
 		return {
 			ninjaOne,
@@ -100,6 +105,7 @@ export default {
 			search,
 			handleClick,
 			posts,
+			showPosts,
 		};
 	},
 };
