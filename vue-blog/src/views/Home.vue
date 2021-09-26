@@ -22,16 +22,23 @@
 		</div>
 		<!-- stop watch -->
 		<button @click="handleClick">stop watching</button>
+
+		<!-- Props -->
+		<PostList :posts="posts" />
 	</div>
 </template>
 
 <script>
+import PostList from '../components/PostList.vue';
 import { ref, reactive, computed } from '@vue/reactivity';
 import { watch, watchEffect } from '@vue/runtime-core';
 // @ is an alias to /src
 
 export default {
 	name: 'Home',
+	components: {
+		PostList,
+	},
 	//setup excutes first. even earlier than created()
 	//with setup, 'this' does not work. returns undefined
 	//$refs will not work without this, so use ref(). automatically imports from vue
@@ -69,6 +76,21 @@ export default {
 			stopEffect();
 		};
 
+		//using props in setup()
+		const posts = ref([
+			{
+				title: 'welcome to the club',
+				body:
+					'Lorem Ipsum well this is me randomly typing words to fill to 100 words. bbecause the lorem ipsum doesnt work. ',
+				id: 1,
+			},
+			{
+				title: 'top 5 fighting tips',
+				body: 'Lorem Fisitng',
+				id: 2,
+			},
+		]);
+
 		return {
 			ninjaOne,
 			updateNinjaOne,
@@ -77,6 +99,7 @@ export default {
 			matchingNames,
 			search,
 			handleClick,
+			posts,
 		};
 	},
 };
