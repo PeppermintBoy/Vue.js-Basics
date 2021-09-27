@@ -25,7 +25,11 @@
 
 		<!-- Props & lifecycle hooks -->
 		<h2>Props & Lifecycle hooks</h2>
-		<PostList v-if="showPosts" :posts="posts" />
+		<div v-if="error">{{ error }}</div>
+		<div v-if="posts.length">
+			<PostList v-if="showPosts" :posts="posts" />
+		</div>
+		<div v-else>Loading data...</div>
 		<button @click="showPosts = !showPosts">Toggle posts</button>
 		<button @click="posts.pop()">Delete a post</button>
 	</div>
@@ -79,22 +83,24 @@ export default {
 			stopEffect();
 		};
 
-		//using props in setup()
-		const posts = ref([
-			{
-				title: 'welcome to the club',
-				body:
-					'Lorem Ipsum well this is me randomly typing words to fill to 100 words. bbecause the lorem ipsum doesnt work. ',
-				id: 1,
-			},
-			{
-				title: 'top 5 fighting tips',
-				body: 'Lorem Fisitng',
-				id: 2,
-			},
-		]);
+		//using props and fetching data(db.json) in setup()
+		const posts = ref([]);
+		const error = ref(null);
+		const load = async () => {
+			//TRY, fail? THROW error, then CATCH the error
+			try {
+				let data = await fetch('http://localhost:3000/posts');
+				if (!data.ok) {
+					throw Error('no data available');
+				}
+				posts.value = await data.json();
+			} catch (err) {
+				error.value = err.message;
+			}
+		};
+		load();
 		//Lifecycles
-		const showPosts = ref(false);
+		const showPosts = ref(true);
 
 		return {
 			ninjaOne,
@@ -105,6 +111,7 @@ export default {
 			search,
 			handleClick,
 			posts,
+			error,
 			showPosts,
 		};
 	},

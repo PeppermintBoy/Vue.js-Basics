@@ -1,0 +1,16 @@
+{
+	"posts": [
+		{
+			"id": 1,
+			"title": "Welcome to the yoyo's",
+			"body": "Lorem Ipsum this is random text",
+			"tags": ["webdev", "coding", "news"]
+		},
+		{
+			"id": 2,
+			"title": "top 5 CSS tips",
+			"body": "Lorem Ipsum yet this is another random text",
+			"tags": ["css", "webdev", "coding"]
+		}
+	]
+}
